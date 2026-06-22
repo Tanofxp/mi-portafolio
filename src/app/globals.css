@@ -1,27 +1,23 @@
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --color-background: #0a0a0a;
+  --color-foreground: #ededed;
+  --color-surface: #111111;
+  --color-border: #1f1f1f;
+  --color-muted: #a1a1a1;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-success: #10b981;
+  --section-spacing: 8rem;
+  --section-spacing-mobile: 5rem;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Enhanced glass effect variables */
+  --glass-bg: rgb(17 17 17 / 0.8);
+  --glass-border: rgb(255 255 255 / 0.1);
+  --glass-shadow: rgb(0 0 0 / 0.37);
 }
 
 * {
@@ -30,13 +26,276 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+  /* Subtle background texture */
+  background-image:
+    radial-gradient(at 40% 20%, rgb(59 130 246 / 0.05) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgb(59 130 246 / 0.03) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgb(59 130 246 / 0.03) 0px, transparent 50%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(161 161 161 / 0.5);
+}
+
+/* Section spacing and dividers */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border) 20%,
+    var(--color-border) 80%,
+    transparent
+  );
+  margin: var(--section-spacing-mobile) auto;
+  max-width: 1200px;
+}
+
+@media (min-width: 1024px) {
+  .section-divider {
+    margin: var(--section-spacing) auto;
   }
+}
+
+/* Enhanced section divider with glow effect */
+.section-divider-glow {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(59 130 246 / 0.3) 30%,
+    rgb(59 130 246 / 0.5) 50%,
+    rgb(59 130 246 / 0.3) 70%,
+    transparent
+  );
+  margin: var(--section-spacing-mobile) auto;
+  max-width: 1200px;
+  box-shadow: 0 0 20px rgb(59 130 246 / 0.2);
+}
+
+@media (min-width: 1024px) {
+  .section-divider-glow {
+    margin: var(--section-spacing) auto;
+  }
+}
+
+/* Gradient backgrounds */
+.gradient-bg-1 {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgb(59 130 246 / 0.15),
+    transparent
+  );
+}
+
+.gradient-bg-2 {
+  background: radial-gradient(
+    ellipse 60% 40% at 50% 50%,
+    rgb(59 130 246 / 0.08),
+    transparent
+  );
+}
+
+.gradient-bg-3 {
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 100%,
+    rgb(59 130 246 / 0.1),
+    transparent
+  );
+}
+
+/* Section background variations */
+.section-bg-subtle {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(17 17 17 / 0.5) 50%,
+    transparent
+  );
+}
+
+.section-bg-accent {
+  background: radial-gradient(
+    ellipse 100% 50% at 50% 50%,
+    rgb(59 130 246 / 0.03),
+    transparent
+  );
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Enhanced glow effect for cards */
+.glow-hover {
+  position: relative;
+}
+
+.glow-hover::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgb(59 130 246 / 0.3),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(10px);
+}
+
+.glow-hover:hover::before {
+  opacity: 1;
+}
+
+/* Smooth focus styles for form inputs */
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+}
+
+/* Enhanced button press effect */
+button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive text sizing utilities */
+@media (max-width: 640px) {
+  .text-responsive-xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-responsive-2xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .text-responsive-xl {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  .text-responsive-2xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive-xl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .text-responsive-2xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+/* Card hover animations */
+@keyframes card-hover {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Backdrop blur support */
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+
+  .backdrop-blur {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+a,
+button,
+input,
+textarea,
+select {
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
